@@ -13,6 +13,9 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <style>
+    .dropdown-item:hover{
+      background: linear-gradient(90deg,  #f7d1d2, #D61C6C);
+      }
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -21,7 +24,23 @@
       -ms-user-select: none;
       user-select: none;
     }
-
+    #totalAmount {
+      text-align: right;
+    }
+    #btn-buy{
+      background-color:  #D61C6C;
+      border:  #D33438;
+    }
+    #btn-buy:hover{
+      background:linear-gradient(90deg,  #D33438, #D61C6C);
+    }
+    #btn-save{
+      background-color:  #D61C6C;
+      border:  #D33438;
+    }
+    #btn-save:hover{
+      background:linear-gradient(90deg,  #D33438, #D61C6C);
+    }
     @media (min-width: 768px) {
       .bd-placeholder-img-lg {
         font-size: 3.5rem;
@@ -35,21 +54,204 @@
 
 <body>
   <nav class="site-header sticky-top py-1 bg-dark">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
       <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary" id="loginUser"></button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <a class="dropdown-item" href="cart.html">Mi carrito</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="login.html">Cerrar sesión</a>
+        </div>
+      </div>
+      </div>
+      </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 5 (Fecha de entrega: 11/10/2020) y Entrega 6 (Fecha de entrega: 25/10/2020).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div class="container">
+
+    <div class="text-center p-4">
+      <h2><b>Carrito de compras</b></h2>
+      <p class="lead">Verás aquí todos los productos del sitio que has añadido a tú carrito.</p>
     </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-8 list-group mt-4">
+          <ul class="list-group-item rounded">
+            <div class="row">
+              <div class="col-3 d-flex align-items-center">
+                <div class="d-flex w-100 align-items-center justify-content-center">
+                  <b>Artículo</b>
+                </div>
+              </div>
+              <div class="col-3 d-flex align-items-center">
+                <div class="d-flex w-100 align-items-center justify-content-center">
+                  <b>Nombre</b>
+                </div>
+              </div>
+              <div class="col-3 d-flex align-items-center">
+                <div class="d-flex w-100 align-items-center justify-content-center">
+                  <b>Precio</b>
+                </div>
+              </div>
+              <div class="col-3 d-flex align-items-center">
+                <div class="d-flex w-100 align-items-center justify-content-center">
+                  <b>Cantidad</b>
+                </div>
+              </div>
+            </div>
+          </ul>
+          <div class="mt-3" id="cart-content"></div>
+        </div>
+        <div class="col-4 mt-4 pr-0">
+          <h5 class="mb-3">Tipo de Envío</h5>
+          <hr class="mb-4">
+          <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+              <input id="premiumradio" name="publicationType" type="radio" class="custom-control-input" checked="" required="">
+              <label class="custom-control-label" for="premiumradio">Premium 2 a 5 días (15%)</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="expressradio" name="publicationType" type="radio" class="custom-control-input" required="">
+              <label class="custom-control-label" for="expressradio">Express 5 a 8 días (7%)</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="standardradio" name="publicationType" type="radio" class="custom-control-input" required="">
+              <label class="custom-control-label" for="standardradio">Standar 12 a 15 días (5%)</label>
+            </div>
+          </div>
+          <h5 class="mb-3">Dirección de envío</h5>
+          <hr class="mb-4">
+          <div class="row">
+            <div class="col-6 mt-3">
+              <label for="state">País</label>
+              <input type="text" id="country" class="form-control" placeholder="" value="">
+              <div class="invalid-feedback">
+                Ingresa un país
+              </div>
+            </div>
+            <div class="col-7">
+              <label for="street">Calle</label>
+              <input type="text" class="form-control" id="street" placeholder="" value="">
+              <div class="invalid-feedback">
+                Ingresa una calle
+              </div>
+            </div>
+            <div class="col-2">
+              <label for="portNumber">Número</label>
+              <input type="text" class="form-control" id="portNumber" placeholder="" value="">
+              <div class="invalid-feedback">
+                Ingresa un número de puerta
+              </div>
+            </div>
+            <div class="col-4 mt-3">
+              <label for="corner">Esquina</label>
+              <input type="text" class="form-control" id="corner" placeholder="" value="">
+              <div class="invalid-feedback">
+                Ingresa una esquina
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <hr class="mb-4">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Sub-Total</h6>
+                <small class="text-muted">Costo sin envío</small>
+              </div>
+              <span class="text-muted" id="subTotalHTML">-</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Porcentaje</h6>
+                <small class="text-muted">Según el tipo de envío</small>
+              </div>
+              <span class="text-muted" id="shippingPercentage">-</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between rounded-bottom">
+              <span>Total</span>
+              <strong id="totalCostHTML">-</strong>
+            </li>
+            <li class="list-group-item d-flex justify-content-between rounded-bottom">
+              <span>Forma de Pago</span>
+                <div class="col-2">
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-link" data-toggle="modal" data-target="#pagosModal">Seleccionar Forma de Pago</button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="paymentsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Forma de Pago</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col">
+                                <div class="custom-control custom-radio">
+                                  <input id="credit-card" type="radio" class="custom-control-input" required="">
+                                  <label class="custom-control-label" for="creditCard">Tarjeta de Crédito</label>
+                                  <hr class="mb-4">
+                                  <label for="number-card">Número de tarjeta</label>
+                                  <input type="text" class="col-mb-2" id="number-card" placeholder="" required="">
+                                  <label for="code-card">Código de seguridad</label>
+                                  <input type="text" class="" id="code-card" placeholder="" required="">
+                                  <label for="expiration">Vencimiento (MM/AA)</label>
+                                  <input type="text" class="" id="expiration" placeholder="" required="">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="container">
+                            <div class="row">
+                              <div class="col">
+                                <div class="custom-control custom-radio">
+                                  <input id="bank-transfer" type="radio" class="custom-control-input" required="">
+                                  <label class="custom-control-label" for="bank-transfer">Transferencia bancaria</label>
+                                  <hr class="mb-4">
+                                  <label for="acount-number">Número de cuenta</label>
+                                  <input type="text" class="" id="acount-number" placeholder="" required="">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="btn-save">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </li>
+            <li class="list-group mt-3">
+              <button class="btn btn-brand w-100 btn-primary font-weight-bold" id="btn-buy">Realizar Comprar</button>
+            </li>
+          </ul> 
+        </div>
+      </div>
+    </div>
+   
   </div>
   <div id="spinner-wrapper">
     <div class="lds-ring">
@@ -59,6 +261,15 @@
       <div></div>
     </div>
   </div>
+  <footer class="text-muted bg-light">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/dropzone.js"></script>

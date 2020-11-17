@@ -13,6 +13,9 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
   <style>
+    .dropdown-item:hover{
+      background: linear-gradient(90deg,  #f7d1d2, #D61C6C);
+    }
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -40,15 +43,119 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <div class="btn-group">
+        <button type="button" class="btn btn-secondary" id="loginUser"></button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenuReference" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <a class="dropdown-item" href="cart.html">Mi carrito</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="login.html">Cerrar sesión</a>
+        </div>
+      </div>
     </div>
   </nav>
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 7 (Fecha de entrega: 8/11/202020) -> Punto 1 y 2.</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    <div class="row">
+      <div class="col mx-auto">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col" style="text-align: center;">
+                <img src="img/user-profile-logo.png" class="img-fluid  rounded-circle w-25" alt="" id="profile-picture"> 
+              </div>
+            </div>
+            <div class="row">
+              <div class="col" id="my-profile">
+                <h4 id="" style="text-align: center;">Tú perfil</h4><!--Cambiar por el nombre con el cual se loguea-->
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfile" style="float: right;">
+                  Editar perfil
+                </button>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12 col-md-8">
+                  <h5>Nombre:</h5>
+                  <p class="lead em" id="name"></p>
+                </div>
+                <div class="col-xs-6 col-md-4">
+                  <h5>Apellido:</h5>
+                  <p class="lead em" id="surname"></p>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-xs-6 col-md-4">
+                  <h5>Edad:</h5>
+                  <p class="lead em" id="age"></p>
+                </div>
+                <div class="col-xs-6 col-md-4">
+                  <h5>Número de contacto:</h5>
+                  <p class="lead em" id="contact"></p>
+                </div>
+                <div class="col-xs-6 col-md-4">
+                  <h5>Correo eléctrónico:</h5>
+                  <p class="lead em" id="email"></p>
+                </div>
+              </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar perfil</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col">
+                        <form>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputFirstName">Nombre</label>
+                              <input type="text" class="form-control" id="inputFirstName" placeholder="Ingrese su nombre">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="inputLastName">Apellido</label>
+                              <input type="text" class="form-control" id="inputLastName" placeholder="Ingrese su apellido">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="inputAge">Edad</label>
+                            <input type="number" class="form-control" id="inputAge" placeholder="Ingrese su edad">
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputContactNumber">Número de contacto</label>
+                              <input type="text" class="form-control" id="inputContactNumber" placeholder="Ingrese su número de celular">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="inputEmail">Correo electrónico</label>
+                              <input type="email" class="form-control" id="inputEmail" placeholder="Ingrese su correo electrónico">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="getData()">Guardar cambios</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <footer class="text-muted bg-light">

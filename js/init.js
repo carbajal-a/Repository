@@ -38,10 +38,38 @@ var getJSONData = function(url){
         hideSpinner();
         return result;
     });
+  
+}
+//Redireccionar inicio a login
+  if(!sessionStorage.getItem("signed") && !window.location.href.endsWith("login.html")){
+    window.location  = "./login.html";
+
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+  
+  showSpinner();
+  
+  getJSONData(PRODUCTS_URL).then(resultObj)
+  {
+    if (resultObj.status === "ok"){
+      productsArray = resultObj.data;
+      showProductsList(productsArray);
+      hideSpinner;
+
+    }
+  };
 });
+
+//Nombre de usuario en barra de navegación
+//Mostrar datos almacenado de usuario
+console.log(JSON.parse(localStorage.getItem("user")));
+var em = JSON.parse(localStorage.getItem("user")).user;
+document.getElementById("loginUser").innerHTML = '<p>'+ em + '<p>';
+
+//Buscador interno en proceso
+
+
